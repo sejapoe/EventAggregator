@@ -47,4 +47,6 @@ dependencies {
 
     // Custom KGraphql build for Ktor 2.0 support
     implementation("io.ktor", "ktor-serialization-kotlinx-json", libs.versions.ktor.get())
+    implementation("io.ktor:ktor-server-default-headers-jvm:2.3.0")
+    implementation("io.ktor:ktor-server-call-logging-jvm:2.3.0")
 }

@@ -1,0 +1,17 @@
+package usecases.model
+
+import domain.entity.user.Authorities
+import domain.entity.user.Email
+import domain.entity.user.User
+
+data class UserModel(
+    val id: Int,
+    val email: Email,
+    val authorities: List<Authorities> = listOf(),
+) {
+    constructor(user: User) : this(
+        id = user.id,
+        email = user.email,
+        authorities = user.authorities,
+    )
+}

@@ -11,11 +11,11 @@ include(
     ":domain",
     ":use-cases",
     ":infrastructure:ktor",
-    ":adapters:authentication",
+    ":adapters:auth",
     ":adapters:config",
     ":adapters:graphql",
-    ":adapters:logging",
-    ":adapters:repositories"
+    ":adapters:log",
+    ":adapters:repo"
 )
 
 dependencyResolutionManagement {
