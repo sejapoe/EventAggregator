@@ -2,11 +2,6 @@ package config
 
 import auth.JWTAuthenticatorImpl
 import auth.PasswordEncoderImpl
-import domain.entity.user.Authorities
-import domain.entity.user.Email
-import domain.entity.user.Password
-import domain.entity.user.User
-import domain.repo.user.UserRepo
 import log.LoggerImpl
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.bind
