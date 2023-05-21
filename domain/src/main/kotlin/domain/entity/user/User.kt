@@ -1,7 +1,5 @@
 package domain.entity.user
 
-import domain.EmailInvalidException
-import domain.PasswordInvalidException
 import domain.entity.Entity
 import domain.entity.ValueClass
 

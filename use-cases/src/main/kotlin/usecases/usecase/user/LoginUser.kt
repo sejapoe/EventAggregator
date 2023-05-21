@@ -1,7 +1,7 @@
 package usecases.usecase.user
 
-import domain.LoginException
 import domain.entity.user.Authorities
+import domain.entity.user.LoginException
 import domain.repo.user.UserRepo
 import usecases.dependency.Authenticator
 import usecases.dependency.Logger

@@ -1,7 +1,7 @@
 package usecases.usecase.user
 
-import domain.AuthException
-import domain.LoginException
+import domain.entity.user.AuthException
+import domain.entity.user.LoginException
 import domain.repo.user.UserRepo
 import io.mockk.every
 import io.mockk.mockk

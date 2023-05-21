@@ -3,9 +3,9 @@ package ktor.plugins
 import com.google.gson.*
 import com.google.gson.reflect.TypeToken
 import domain.AlreadyExistsException
-import domain.AuthException
-import domain.LoginException
 import domain.NotFoundException
+import domain.entity.user.AuthException
+import domain.entity.user.LoginException
 import io.bkbn.kompendium.core.metadata.GetInfo
 import io.bkbn.kompendium.core.metadata.MethodInfo
 import io.bkbn.kompendium.core.metadata.PostInfo

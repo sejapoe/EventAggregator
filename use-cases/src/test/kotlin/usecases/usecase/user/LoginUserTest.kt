@@ -1,6 +1,6 @@
 package usecases.usecase.user
 
-import domain.LoginException
+import domain.entity.user.LoginException
 import domain.entity.user.Password
 import domain.entity.user.PasswordHash
 import domain.repo.user.UserRepo

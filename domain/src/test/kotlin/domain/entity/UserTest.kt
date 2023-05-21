@@ -1,7 +1,5 @@
 package domain.entity
 
-import domain.EmailInvalidException
-import domain.PasswordInvalidException
 import domain.entity.user.*
 import kotlin.test.Test
 import kotlin.test.assertFailsWith

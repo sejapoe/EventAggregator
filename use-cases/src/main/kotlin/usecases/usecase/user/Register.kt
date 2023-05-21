@@ -1,9 +1,9 @@
 package usecases.usecase.user
 
-import domain.UserAlreadyExistsException
 import domain.entity.user.Authorities
 import domain.entity.user.PasswordHash
 import domain.entity.user.User
+import domain.entity.user.UserAlreadyExistsException
 import domain.repo.user.UserRepo
 import usecases.dependency.Logger
 import usecases.model.RegisterUserModel

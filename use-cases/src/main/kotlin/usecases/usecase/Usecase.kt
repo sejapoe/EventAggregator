@@ -1,8 +1,8 @@
 package usecases.usecase
 
-import domain.AuthException
+import domain.entity.user.AuthException
 import domain.entity.user.Authorities
-import domain.LoginException
+import domain.entity.user.LoginException
 import usecases.dependency.Logger
 import usecases.model.UserModel
 import kotlin.reflect.KType
