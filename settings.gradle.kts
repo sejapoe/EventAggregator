@@ -13,7 +13,6 @@ include(
     ":infrastructure:ktor",
     ":adapters:auth",
     ":adapters:config",
-    ":adapters:graphql",
     ":adapters:log",
     ":adapters:repo"
 )
