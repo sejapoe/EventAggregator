@@ -11,6 +11,11 @@ import repo.user.AuthorityTable
 import repo.user.UserTable
 
 object DatabaseFactory {
+    private val tables = arrayOf(
+        UserTable,
+        AuthorityTable,
+    )
+
     fun init(
         driver: String,
         url: String,
@@ -33,8 +38,6 @@ object DatabaseFactory {
         }
         val ds = HikariDataSource(config)
         Database.connect(ds)
-
-        val tables = arrayOf(UserTable, AuthorityTable)
 
         if (drop) {
             transaction {
