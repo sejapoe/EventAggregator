@@ -8,10 +8,10 @@ data class User(
     val email: Email,
     val authorities: List<Authorities> = listOf(),
     val password: PasswordHash,
-) : Entity
+) : Entity<Int>
 
 enum class Authorities {
-    USER, MANAGER, ADMIN
+    USER, ORGANIZER, ADMIN
 }
 
 data class Email(

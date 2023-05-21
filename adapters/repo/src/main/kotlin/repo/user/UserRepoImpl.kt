@@ -16,7 +16,7 @@ class UserRepoImpl : UserRepo, BaseDAO<User, Int, UserEntity>(UserEntity) {
         UserEntity.find { UserTable.email eq email.value }.firstOrNull()?.toUser()
     }
 
-    override suspend fun save(entity: User): User = query {
+    override suspend fun create(entity: User): User = query {
         val user = UserEntity.new {
             email = entity.email
             password = entity.password
@@ -28,8 +28,24 @@ class UserRepoImpl : UserRepo, BaseDAO<User, Int, UserEntity>(UserEntity) {
                 authority = it
             }
         }
-
         user.toUser()
     }
 
+    override suspend fun update(existing: UserEntity, entity: User): User = query {
+        existing.email = entity.email
+        existing.password = entity.password
+        val existingAuthorities = existing.authorities.map { it.authority }
+        val toDelete = existing.authorities.filter { it.authority !in entity.authorities }
+        toDelete.forEach {
+            it.delete()
+        }
+        val newAuthorities = entity.authorities.filter { it !in existingAuthorities }
+        newAuthorities.forEach {
+            AuthorityEntity.new {
+                this.user = existing
+                authority = it
+            }
+        }
+        existing.toUser()
+    }
 }

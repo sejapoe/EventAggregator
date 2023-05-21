@@ -1,5 +1,5 @@
 package domain.entity
 
-interface Entity {
-    val id: Int
+interface Entity<ID : Any> {
+    val id: ID
 }

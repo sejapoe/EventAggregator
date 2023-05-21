@@ -25,7 +25,7 @@ class Register(logger: Logger, private val repo: UserRepo) :
             email = register.email,
             password = PasswordHash(register.password.value),
             authorities = if (register.isManager) listOf(
-                Authorities.MANAGER,
+                Authorities.ORGANIZER,
                 Authorities.USER
             ) else listOf(Authorities.USER),
         )
