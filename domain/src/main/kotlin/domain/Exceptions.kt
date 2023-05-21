@@ -12,6 +12,9 @@ class PasswordInvalidException(message: String? = null, base: String = "Password
 open class AlreadyExistsException(message: String? = null, base: String = "Already exists") :
     Exception(message(base, message))
 
+class UserAlreadyExistsException(message: String? = null, base: String = "User already exists") :
+    AlreadyExistsException(message, base)
+
 class AuthException(message: String? = null, base: String = "No authority for this action") :
     Exception(message(base, message))
 

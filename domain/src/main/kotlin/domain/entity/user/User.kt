@@ -6,14 +6,14 @@ import domain.entity.Entity
 import domain.entity.ValueClass
 
 data class User(
-    override val id: Int,
+    override val id: Int = -1,
     val email: Email,
     val authorities: List<Authorities> = listOf(),
     val password: PasswordHash,
 ) : Entity
 
 enum class Authorities {
-    USER, ADMIN
+    USER, MANAGER, ADMIN
 }
 
 data class Email(
