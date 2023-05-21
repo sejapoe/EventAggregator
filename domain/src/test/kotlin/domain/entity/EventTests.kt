@@ -1,3 +1,4 @@
+@file:Suppress("UNUSED_VARIABLE")
 package domain.entity
 
 import domain.entity.event.Event
@@ -11,7 +12,6 @@ import domain.entity.user.User
 import org.junit.Test
 import java.time.LocalDateTime
 import kotlin.test.assertFailsWith
-
 class EventTests {
     private val validUser = User(
         email = Email("test@test.com"),

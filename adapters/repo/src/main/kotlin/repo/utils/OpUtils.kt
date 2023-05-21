@@ -1,3 +1,4 @@
+@file:Suppress("unused")
 package repo.utils
 
 import org.jetbrains.exposed.dao.id.EntityID

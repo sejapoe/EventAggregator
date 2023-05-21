@@ -17,5 +17,5 @@ class ListOrganizers(logger: Logger, private val repo: OrganizerRepo) :
     override val path = "/organizer/list"
 
     override suspend fun executor(authentication: UserModel?) =
-        ListModel(repo.getAll().map { usecases.model.OrganizerModel(it) })
+        ListModel(repo.getAll().map { OrganizerModel(it) })
 }

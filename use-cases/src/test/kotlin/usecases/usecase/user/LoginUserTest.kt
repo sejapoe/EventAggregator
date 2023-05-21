@@ -11,6 +11,7 @@ import usecases.dependency.Authenticator
 import usecases.dependency.PasswordEncoder
 import usecases.logger
 import usecases.model.LoginUserModel
+import usecases.model.UserModel
 import usecases.usecase.UsecaseTests
 import kotlin.test.Test
 import kotlin.test.assertEquals

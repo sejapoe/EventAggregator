@@ -186,6 +186,7 @@ data class RestA1<A0>(
 )
 
 class ValueClassAdapterFactory() : TypeAdapterFactory {
+    @Suppress("UNCHECKED_CAST")
     override fun <T : Any?> create(gson: Gson?, type: TypeToken<T>?): TypeAdapter<T>? {
         val rawType = type!!.rawType
         val type1 = findInterface(rawType.kotlin, ValueClass::class)
@@ -217,7 +218,6 @@ class ValueClassAdapter(private val valueClass: Class<*>, private val argType: T
         out!!.jsonValue(gson.toJson(value.value))
     }
 
-    @Suppress("UNCHECKED_CAST")
     override fun read(inp: JsonReader?): ValueClass<*>? {
         if (inp!!.peek() == JsonToken.NULL) {
             inp.nextNull()
@@ -240,7 +240,6 @@ class RestA1Adapter(private val valueClass: Class<*>, private val argType: Type)
         out!!.jsonValue(gson.toJson(value.a0))
     }
 
-    @Suppress("UNCHECKED_CAST")
     override fun read(inp: JsonReader?): RestA1<*>? {
         if (inp!!.peek() == JsonToken.NULL) {
             inp.nextNull()
