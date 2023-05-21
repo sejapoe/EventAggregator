@@ -1,0 +1,825 @@
+{
+  "openapi": "3.0.3",
+  "jsonSchemaDialect": "https://json-schema.org/draft/2020-12/schema",
+  "info": {
+    "title": "EventAggregator",
+    "version": "1.0.0"
+  },
+  "servers": [],
+  "paths": {
+    "/loginuser": {
+      "post": {
+        "tags": [],
+        "summary": "LoginUser",
+        "description": "LoginUser",
+        "parameters": [],
+        "requestBody": {
+          "description": "LoginUser",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginUserModel"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "LoginUser",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/String"
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "\"default\"": []
+          }
+        ]
+      },
+      "parameters": []
+    },
+    "/event/new": {
+      "post": {
+        "tags": [],
+        "summary": "NewEvent",
+        "description": "NewEvent",
+        "parameters": [],
+        "requestBody": {
+          "description": "NewEvent",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewEventModel"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "NewEvent",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventModel"
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "\"default\"": []
+          }
+        ]
+      },
+      "parameters": []
+    },
+    "/event/delete": {
+      "post": {
+        "tags": [],
+        "summary": "DeleteEvent",
+        "description": "DeleteEvent",
+        "parameters": [],
+        "requestBody": {
+          "description": "DeleteEvent",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IdModel"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "DeleteEvent"
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "\"default\"": []
+          }
+        ]
+      },
+      "parameters": []
+    },
+    "/event/list": {
+      "post": {
+        "tags": [],
+        "summary": "ListEvents",
+        "description": "ListEvents",
+        "parameters": [],
+        "requestBody": {
+          "description": "ListEvents",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EventFilter"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "ListEvents",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListModel-EventModel"
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "\"default\"": []
+          }
+        ]
+      },
+      "parameters": []
+    },
+    "/event/update": {
+      "post": {
+        "tags": [],
+        "summary": "UpdateEvent",
+        "description": "UpdateEvent",
+        "parameters": [],
+        "requestBody": {
+          "description": "UpdateEvent",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateEventModel"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "UpdateEvent",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventModel"
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "\"default\"": []
+          }
+        ]
+      },
+      "parameters": []
+    },
+    "/user/list": {
+      "get": {
+        "tags": [],
+        "summary": "ListUsers",
+        "description": "ListUsers",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ListUsers",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListModel-UserModel"
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "\"default\"": []
+          }
+        ]
+      },
+      "parameters": []
+    },
+    "/organizer/update": {
+      "post": {
+        "tags": [],
+        "summary": "UpdateOrganizer",
+        "description": "UpdateOrganizer",
+        "parameters": [],
+        "requestBody": {
+          "description": "UpdateOrganizer",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateOrganizerModel"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "UpdateOrganizer",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrganizerModel"
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "\"default\"": []
+          }
+        ]
+      },
+      "parameters": []
+    },
+    "/organizer/new": {
+      "post": {
+        "tags": [],
+        "summary": "NewOrganizer",
+        "description": "NewOrganizer",
+        "parameters": [],
+        "requestBody": {
+          "description": "NewOrganizer",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewOrganizerModel"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "NewOrganizer",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrganizerModel"
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "\"default\"": []
+          }
+        ]
+      },
+      "parameters": []
+    },
+    "/event/get": {
+      "post": {
+        "tags": [],
+        "summary": "GetEvent",
+        "description": "GetEvent",
+        "parameters": [],
+        "requestBody": {
+          "description": "GetEvent",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IdModel"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "GetEvent",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventModel"
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "\"default\"": []
+          }
+        ]
+      },
+      "parameters": []
+    },
+    "/register": {
+      "post": {
+        "tags": [],
+        "summary": "Register",
+        "description": "Register",
+        "parameters": [],
+        "requestBody": {
+          "description": "Register",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterUserModel"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Register",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserModel"
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "\"default\"": []
+          }
+        ]
+      },
+      "parameters": []
+    },
+    "/organizer/list": {
+      "get": {
+        "tags": [],
+        "summary": "ListOrganizers",
+        "description": "ListOrganizers",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ListOrganizers",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListModel-OrganizerModel"
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "\"default\"": []
+          }
+        ]
+      },
+      "parameters": []
+    }
+  },
+  "webhooks": {},
+  "components": {
+    "schemas": {
+      "Instant": {
+        "type": "string",
+        "format": "date-time"
+      },
+      "Date": {
+        "type": "string",
+        "format": "date-time"
+      },
+      "LocalDateTime": {
+        "type": "string",
+        "format": "date-time"
+      },
+      "String": {
+        "type": "string"
+      },
+      "LoginUserModel": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "email",
+          "password"
+        ]
+      },
+      "EventModel": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "type": "number",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string"
+          },
+          "organizer": {
+            "$ref": "#/components/schemas/OrganizerModel"
+          }
+        },
+        "required": [
+          "date",
+          "description",
+          "id",
+          "name",
+          "organizer"
+        ]
+      },
+      "OrganizerModel": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "type": "number",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string"
+          },
+          "user": {
+            "$ref": "#/components/schemas/UserModel"
+          }
+        },
+        "required": [
+          "description",
+          "id",
+          "name",
+          "user"
+        ]
+      },
+      "UserModel": {
+        "type": "object",
+        "properties": {
+          "authorities": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "USER",
+                "ORGANIZER",
+                "ADMIN"
+              ]
+            },
+            "type": "array"
+          },
+          "email": {
+            "type": "string"
+          },
+          "id": {
+            "type": "number",
+            "format": "int32"
+          }
+        },
+        "required": [
+          "email",
+          "id"
+        ]
+      },
+      "Authorities": {
+        "$ref": "#/components/schemas/Authorities"
+      },
+      "NewEventModel": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "description": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "organizerId": {
+            "type": "number",
+            "format": "int32"
+          }
+        },
+        "required": [
+          "date",
+          "description",
+          "name",
+          "organizerId"
+        ]
+      },
+      "IdModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "format": "int32"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      },
+      "ListModel-EventModel": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/EventModel"
+            },
+            "type": "array"
+          },
+          "total": {
+            "type": "number",
+            "format": "int32"
+          }
+        },
+        "required": [
+          "items",
+          "total"
+        ]
+      },
+      "EventFilter": {
+        "type": "object",
+        "properties": {
+          "after": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "type": "string",
+                "format": "date-time"
+              }
+            ]
+          },
+          "before": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "type": "string",
+                "format": "date-time"
+              }
+            ]
+          },
+          "name": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "type": "string"
+              }
+            ]
+          },
+          "organizer": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/OrganizerFilter"
+              }
+            ]
+          }
+        },
+        "required": []
+      },
+      "OrganizerFilter": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "type": "string"
+              }
+            ]
+          },
+          "id": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "type": "number",
+                "format": "int32"
+              }
+            ]
+          },
+          "name": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "type": "string"
+              }
+            ]
+          },
+          "user": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/UserFilter"
+              }
+            ]
+          }
+        },
+        "required": []
+      },
+      "UserFilter": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "type": "string"
+              }
+            ]
+          },
+          "id": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "type": "number",
+                "format": "int32"
+              }
+            ]
+          }
+        },
+        "required": []
+      },
+      "UpdateEventModel": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "type": "number",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string"
+          },
+          "organizerId": {
+            "type": "number",
+            "format": "int32"
+          }
+        },
+        "required": [
+          "date",
+          "description",
+          "id",
+          "name",
+          "organizerId"
+        ]
+      },
+      "ListModel-UserModel": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/UserModel"
+            },
+            "type": "array"
+          },
+          "total": {
+            "type": "number",
+            "format": "int32"
+          }
+        },
+        "required": [
+          "items",
+          "total"
+        ]
+      },
+      "UpdateOrganizerModel": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "type": "number",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "description",
+          "id",
+          "name"
+        ]
+      },
+      "NewOrganizerModel": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "description",
+          "name"
+        ]
+      },
+      "RegisterUserModel": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "isManager": {
+            "type": "boolean"
+          },
+          "password": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "email",
+          "password"
+        ]
+      },
+      "ListModel-OrganizerModel": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/OrganizerModel"
+            },
+            "type": "array"
+          },
+          "total": {
+            "type": "number",
+            "format": "int32"
+          }
+        },
+        "required": [
+          "items",
+          "total"
+        ]
+      }
+    },
+    "securitySchemes": {
+      "bearer": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "security": [],
+  "tags": []
+}
