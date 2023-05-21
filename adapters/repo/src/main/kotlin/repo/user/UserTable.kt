@@ -8,6 +8,7 @@ import org.jetbrains.exposed.dao.IntEntity
 import org.jetbrains.exposed.dao.IntEntityClass
 import org.jetbrains.exposed.dao.id.EntityID
 import org.jetbrains.exposed.dao.id.IntIdTable
+import org.jetbrains.exposed.sql.ReferenceOption
 
 internal object UserTable : IntIdTable() {
     val email = varchar("email", 50).index(isUnique = true)
@@ -25,13 +26,13 @@ class UserEntity(id: EntityID<Int>) : IntEntity(id) {
 }
 
 internal object AuthorityTable : IntIdTable() {
-    val user = reference("user", UserTable)
-    val authority = varchar("authority", 255)
+    val user = reference("user", UserTable, onDelete = ReferenceOption.CASCADE)
+    val authority = enumeration<Authorities>("authority")
 }
 
 class AuthorityEntity(id: EntityID<Int>) : IntEntity(id) {
     var user by UserEntity referencedOn AuthorityTable.user
-    var authority by AuthorityTable.authority.transform({ it.name }, { Authorities.valueOf(it) })
+    var authority by AuthorityTable.authority
 
     companion object : IntEntityClass<AuthorityEntity>(AuthorityTable)
 }
