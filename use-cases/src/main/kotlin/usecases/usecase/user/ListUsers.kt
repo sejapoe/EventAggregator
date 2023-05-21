@@ -14,8 +14,10 @@ data class ListUsersModel(
 )
 
 @Query
+@Suppress("unused")
 class ListUsers(logger: Logger, private val repo: UserRepo) :
     UsecaseA0<ListUsersModel>(typeOf<ListUsersModel>(), logger) {
+//    override val authenticated = false
     override val authorities: List<Authorities>
         get() = listOf(Authorities.USER)
 

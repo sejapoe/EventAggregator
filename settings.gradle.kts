@@ -40,6 +40,7 @@ dependencyResolutionManagement {
             version("mockk", "1.13.5")
             version("reflections", "0.10.2")
             version("updateversions", "0.46.0")
+            version("postgresql", "42.3.1")
         }
     }
 }

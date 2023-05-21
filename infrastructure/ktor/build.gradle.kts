@@ -49,4 +49,8 @@ dependencies {
     implementation("io.ktor", "ktor-serialization-kotlinx-json", libs.versions.ktor.get())
     implementation("io.ktor:ktor-server-default-headers-jvm:2.3.0")
     implementation("io.ktor:ktor-server-call-logging-jvm:2.3.0")
+    implementation("io.ktor:ktor-server-forwarded-header-jvm:2.3.0")
+    implementation("io.ktor:ktor-server-auth-jvm:2.3.0")
+    implementation("io.ktor:ktor-server-core-jvm:2.3.0")
+    implementation("io.ktor:ktor-server-auth-jwt-jvm:2.3.0")
 }

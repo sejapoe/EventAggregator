@@ -2,6 +2,7 @@ package usecases.model
 
 import domain.entity.user.Authorities
 import domain.entity.user.Email
+import domain.entity.user.Password
 import domain.entity.user.User
 
 data class UserModel(
@@ -15,3 +16,9 @@ data class UserModel(
         authorities = user.authorities,
     )
 }
+
+
+data class LoginUserModel(
+    val email: Email,
+    val password: Password
+)

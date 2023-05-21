@@ -2,6 +2,11 @@ package config
 
 import auth.JWTAuthenticatorImpl
 import auth.PasswordEncoderImpl
+import domain.entity.user.Authorities
+import domain.entity.user.Email
+import domain.entity.user.Password
+import domain.entity.user.User
+import domain.repo.user.UserRepo
 import log.LoggerImpl
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.bind
@@ -17,15 +22,13 @@ fun modules(config: Config) = listOf(
 
 private fun commonModule(config: Config) = module {
     singleOf(::LoggerImpl).bind<Logger>()
-    singleOf {
+    single<Authenticator> {
         JWTAuthenticatorImpl(
             issuer = config.jwt.domain,
             secret = config.jwt.secret,
         )
-    } bind<Authenticator>()
-    singleOf {
-        PasswordEncoderImpl()
-    } bind < PasswordEncoder >()
+    }
+    singleOf(::PasswordEncoderImpl).bind<PasswordEncoder>()
 }
 
 private fun userModule() = module {
