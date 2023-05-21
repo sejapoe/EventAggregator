@@ -29,6 +29,7 @@ data class Event(
 
 data class EventFilter(
     val name: String? = null,
+    val description: String? = null,
     val after: LocalDateTime? = null,
     val before: LocalDateTime? = null,
     val organizer: OrganizerFilter? = null,

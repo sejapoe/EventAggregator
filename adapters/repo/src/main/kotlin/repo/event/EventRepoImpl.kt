@@ -21,6 +21,7 @@ class EventRepoImpl : EventRepo, BaseDAO<Event, Int, EventEntity>(EventEntity) {
         val op = Op.build {
             var expression: Op<Boolean> = (EventTable.id greater 0) and
                     (EventTable.name likeInside filter.name) and
+                    (EventTable.description likeInside filter.description) and
                     (EventTable.date less filter.before) and
                     (EventTable.date greater filter.after)
             if (filter.organizer != null) {
