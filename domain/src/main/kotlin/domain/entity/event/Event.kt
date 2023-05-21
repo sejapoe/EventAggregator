@@ -22,8 +22,8 @@ data class Event(
             name.isBlank()
             || description.isBlank()
             || name.length > 255
-            || date.isBefore(LocalDateTime.now())
         ) throw EventInvalidException()
+        if (date.isBefore(LocalDateTime.now())) throw DateInvalidException()
     }
 }
 
