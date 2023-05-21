@@ -40,6 +40,7 @@ dependencyResolutionManagement {
             version("reflections", "0.10.2")
             version("updateversions", "0.46.0")
             version("postgresql", "42.3.1")
+            version("kserialization", "1.5.1")
         }
     }
 }

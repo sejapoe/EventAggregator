@@ -7,6 +7,9 @@ import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.Table
 import org.jetbrains.exposed.sql.transactions.transaction
+import repo.event.EventSubscriberTable
+import repo.event.EventTable
+import repo.organizer.OrganizerTable
 import repo.user.AuthorityTable
 import repo.user.UserTable
 
@@ -14,6 +17,9 @@ object DatabaseFactory {
     private val tables = arrayOf(
         UserTable,
         AuthorityTable,
+        EventTable,
+        EventSubscriberTable,
+        OrganizerTable,
     )
 
     fun init(

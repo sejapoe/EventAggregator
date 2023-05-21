@@ -2,8 +2,12 @@ package ktor.plugins
 
 import com.google.gson.*
 import com.google.gson.reflect.TypeToken
+import com.google.gson.stream.JsonReader
+import com.google.gson.stream.JsonToken
+import com.google.gson.stream.JsonWriter
 import domain.AlreadyExistsException
 import domain.NotFoundException
+import domain.entity.ValueClass
 import domain.entity.user.AuthException
 import domain.entity.user.LoginException
 import io.bkbn.kompendium.core.metadata.GetInfo
@@ -20,19 +24,30 @@ import io.ktor.server.routing.*
 import io.ktor.util.pipeline.*
 import usecases.model.UserModel
 import usecases.usecase.*
+import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
 import java.math.BigDecimal
 import java.time.Instant
+import java.time.LocalDateTime
 import kotlin.reflect.KClass
 import kotlin.reflect.KTypeProjection
 import kotlin.reflect.full.createType
 import kotlin.reflect.full.hasAnnotation
+import kotlin.reflect.full.superclasses
 import kotlin.reflect.jvm.jvmErasure
 import kotlin.reflect.typeOf
 
 fun Application.rest(usecases: Collection<UsecaseType<*>>) {
     routing {
         redoc(pageTitle = "EventAggregator API Docs")
+//        install(ContentNegotiation) {
+//            this.gson {
+//                registerTypeAdapterFactory(ValueClassAdapterFactory())
+//                registerTypeAdapter(Instant::class.java, InstantAdapter())
+//                registerTypeAdapter(LocalDateTime::class.java, LocalDateTimeAdapter())
+//                registerTypeAdapter(BigDecimal::class.java, BigDecimalAdapter())
+//            }
+//        }
         authenticate(optional = true) {
             usecases
                 .filter { it::class.hasAnnotation<Query>() || it::class.hasAnnotation<Mutation>() }
@@ -45,7 +60,7 @@ fun Application.rest(usecases: Collection<UsecaseType<*>>) {
 
 private fun Route.usecase(usecase: UsecaseType<*>) {
     val name = usecase::class.simpleName!!
-    route("/${name.lowercase()}") {
+    route(usecase.path) {
         install(NotarizedRoute()) {
             configureNotarizedRoute(usecase, name)
         }
@@ -138,7 +153,9 @@ suspend fun <R, A0 : Any, U : UsecaseA1<A0, R>> PipelineContext<Unit, Applicatio
 }
 
 private val gson = GsonBuilder().apply {
+    registerTypeAdapterFactory(ValueClassAdapterFactory())
     registerTypeAdapter(Instant::class.java, InstantAdapter())
+    registerTypeAdapter(LocalDateTime::class.java, LocalDateTimeAdapter())
     registerTypeAdapter(BigDecimal::class.java, BigDecimalAdapter())
 }.create()!!
 
@@ -147,7 +164,9 @@ private suspend inline fun <reified T : Any> ApplicationCall.deserialize(usecase
         T::class.java,
         *usecase.args.map { boxedClassOf(it.jvmErasure).java }.toTypedArray()
     ).type
-    return gson.fromJson(this.receiveText(), type)
+
+    val receiveText = this.receiveText()
+    return gson.fromJson(receiveText, type)
 }
 
 fun boxedClassOf(kClass: KClass<*>) = when (kClass) {
@@ -166,6 +185,73 @@ data class RestA1<A0>(
     val a0: A0
 )
 
+class ValueClassAdapterFactory() : TypeAdapterFactory {
+    override fun <T : Any?> create(gson: Gson?, type: TypeToken<T>?): TypeAdapter<T>? {
+        val rawType = type!!.rawType
+        val type1 = findInterface(rawType.kotlin, ValueClass::class)
+        if (type1 != null) {
+            val argType = (type1 as ParameterizedType).actualTypeArguments.first()
+            return ValueClassAdapter(rawType, argType) as TypeAdapter<T>
+        }
+        if (rawType == RestA1::class.java) {
+            val argType = (type.type as ParameterizedType).actualTypeArguments.first()
+            return RestA1Adapter(rawType, argType) as TypeAdapter<T>
+        }
+        return gson!!.getDelegateAdapter(this, type)
+    }
+}
+
+fun findInterface(kClass: KClass<*>, interfaceClass: KClass<*>): Type? {
+    return kClass.java.genericInterfaces.firstOrNull() { it.typeName.startsWith(interfaceClass.qualifiedName!!) }
+        ?: kClass.superclasses.firstOrNull { it != Any::class }?.let { findInterface(it, interfaceClass) }
+}
+
+class ValueClassAdapter(private val valueClass: Class<*>, private val argType: Type) :
+    TypeAdapter<ValueClass<*>>() {
+    override fun write(out: JsonWriter?, value: ValueClass<*>?) {
+        if (value == null) {
+            out!!.nullValue()
+            return
+        }
+
+        out!!.jsonValue(gson.toJson(value.value))
+    }
+
+    @Suppress("UNCHECKED_CAST")
+    override fun read(inp: JsonReader?): ValueClass<*>? {
+        if (inp!!.peek() == JsonToken.NULL) {
+            inp.nextNull()
+            return null
+        }
+        val value = gson.fromJson<Any>(inp, argType)
+        val constructor = valueClass.kotlin.constructors.first()
+        return constructor.call(value) as ValueClass<*>
+    }
+}
+
+class RestA1Adapter(private val valueClass: Class<*>, private val argType: Type) :
+    TypeAdapter<RestA1<*>>() {
+    override fun write(out: JsonWriter?, value: RestA1<*>?) {
+        if (value == null) {
+            out!!.nullValue()
+            return
+        }
+
+        out!!.jsonValue(gson.toJson(value.a0))
+    }
+
+    @Suppress("UNCHECKED_CAST")
+    override fun read(inp: JsonReader?): RestA1<*>? {
+        if (inp!!.peek() == JsonToken.NULL) {
+            inp.nextNull()
+            return null
+        }
+        val value = gson.fromJson<Any>(inp, argType)
+        val constructor = valueClass.kotlin.constructors.first()
+        return constructor.call(value) as RestA1<*>
+    }
+}
+
 class InstantAdapter : JsonSerializer<Instant>, JsonDeserializer<Instant> {
     override fun serialize(src: Instant, typeOfSrc: Type, context: JsonSerializationContext) =
         JsonPrimitive(src.toString())
@@ -178,4 +264,12 @@ class BigDecimalAdapter : JsonSerializer<BigDecimal> {
     override fun serialize(src: BigDecimal, typeOfSrc: Type, context: JsonSerializationContext): JsonElement {
         return JsonPrimitive(src.toPlainString())
     }
+}
+
+class LocalDateTimeAdapter : JsonSerializer<LocalDateTime>, JsonDeserializer<LocalDateTime> {
+    override fun serialize(src: LocalDateTime, typeOfSrc: Type, context: JsonSerializationContext) =
+        JsonPrimitive(src.toString())
+
+    override fun deserialize(json: JsonElement, typeOfT: Type, context: JsonDeserializationContext): LocalDateTime =
+        LocalDateTime.parse((json as JsonPrimitive).asString)
 }

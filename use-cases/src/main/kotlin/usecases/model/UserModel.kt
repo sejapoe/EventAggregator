@@ -1,11 +1,9 @@
 package usecases.model
 
-import domain.entity.user.*
-
-data class ListUsersModel(
-    val items: List<UserModel>,
-    val total: Long
-)
+import domain.entity.user.Authorities
+import domain.entity.user.Email
+import domain.entity.user.Password
+import domain.entity.user.User
 
 data class UserModel(
     val id: Int,
@@ -27,6 +25,6 @@ data class LoginUserModel(
 
 data class RegisterUserModel(
     val email: Email,
-    val password: NewPassword,
+    val password: Password,
     val isManager: Boolean = false,
 )

@@ -48,3 +48,8 @@ class NewPassword(value: String) : Password(value) {
         return "NewPassword()"
     }
 }
+
+data class UserFilter(
+    val id: Int? = null,
+    val email: String? = null,
+)

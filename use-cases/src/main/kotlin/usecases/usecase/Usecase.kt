@@ -21,6 +21,7 @@ sealed class UsecaseType<R : Any>(
     abstract val args: List<KType>
     open val authenticated = true
     open val logging = true
+    open val path: String = this::class.simpleName!!.lowercase()
     protected fun before(authentication: UserModel?, vararg args: Any): UserModel? {
         authorize(authentication)
         if (logging) {

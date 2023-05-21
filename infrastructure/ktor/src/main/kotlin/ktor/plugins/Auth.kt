@@ -21,6 +21,9 @@ import usecases.dependency.Authenticator
 import usecases.model.LoginUserModel
 import usecases.model.UserModel
 import usecases.usecase.user.LoginUser
+import java.math.BigDecimal
+import java.time.Instant
+import java.time.LocalDateTime
 
 private const val AUTH_COOKIE = "JWT"
 
@@ -52,7 +55,12 @@ fun Application.auth(config: Config) {
 
     routing {
         install(ContentNegotiation) {
-            gson()
+            gson {
+                registerTypeAdapterFactory(ValueClassAdapterFactory())
+                registerTypeAdapter(Instant::class.java, InstantAdapter())
+                registerTypeAdapter(LocalDateTime::class.java, LocalDateTimeAdapter())
+                registerTypeAdapter(BigDecimal::class.java, BigDecimalAdapter())
+            }
         }
 
         post("/login") {

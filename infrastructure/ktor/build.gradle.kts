@@ -43,6 +43,8 @@ dependencies {
     implementation("io.insert-koin", "koin-ktor", libs.versions.koin.get())
     implementation("com.apurebase", "kgraphql-ktor", libs.versions.kgraphql.get())
     implementation("io.bkbn", "kompendium-core", libs.versions.kompendium.get())
+    implementation("org.reflections", "reflections", libs.versions.reflections.get())
+    implementation(kotlin("reflect", libs.versions.kotlin.get()))
 
     // Custom KGraphql build for Ktor 2.0 support
     implementation("io.ktor", "ktor-serialization-kotlinx-json", libs.versions.ktor.get())

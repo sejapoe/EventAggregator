@@ -19,6 +19,7 @@ import ktor.plugins.rest
 import org.koin.ktor.plugin.Koin
 import usecases.usecase.UsecaseType
 import java.time.Instant
+import java.time.LocalDateTime
 import java.util.*
 import kotlin.reflect.typeOf
 
@@ -54,7 +55,8 @@ fun Application.module() {
         )
         customTypes = mapOf(
             typeOf<Instant>() to TypeDefinition(type = "string", format = "date-time"),
-            typeOf<Date>() to TypeDefinition(type = "string", format = "date-time")
+            typeOf<Date>() to TypeDefinition(type = "string", format = "date-time"),
+            typeOf<LocalDateTime>() to TypeDefinition(type = "string", format = "date-time")
         )
     }
 

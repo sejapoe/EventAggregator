@@ -12,7 +12,8 @@ import usecases.dependency.PasswordEncoder
 
 fun modules(config: Config) = listOf(
     commonModule(config),
-    userModule()
+    userModule(),
+    eventModule()
 )
 
 private fun commonModule(config: Config) = module {
@@ -28,4 +29,9 @@ private fun commonModule(config: Config) = module {
 
 private fun userModule() = module {
     usecasesAndRepos("user")
+}
+
+private fun eventModule() = module {
+    usecasesAndRepos("event")
+    usecasesAndRepos("organizer")
 }
