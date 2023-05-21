@@ -5,6 +5,11 @@ import domain.entity.user.Email
 import domain.entity.user.Password
 import domain.entity.user.User
 
+data class ListUsersModel(
+    val items: List<UserModel>,
+    val total: Long
+)
+
 data class UserModel(
     val id: Int,
     val email: Email,

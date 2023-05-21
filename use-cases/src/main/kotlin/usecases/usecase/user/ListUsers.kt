@@ -3,15 +3,11 @@ package usecases.usecase.user
 import domain.entity.user.Authorities
 import domain.repo.user.UserRepo
 import usecases.dependency.Logger
+import usecases.model.ListUsersModel
 import usecases.model.UserModel
 import usecases.usecase.Query
 import usecases.usecase.UsecaseA0
 import kotlin.reflect.typeOf
-
-data class ListUsersModel(
-    val items: List<UserModel>,
-    val total: Long
-)
 
 @Query
 @Suppress("unused")
