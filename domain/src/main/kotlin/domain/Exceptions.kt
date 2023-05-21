@@ -1,5 +1,14 @@
 package domain
 
+open class InvalidPropertyException(message: String? = null, base: String = "Invalid property") :
+    Exception(message(base, message))
+
+class EmailInvalidException(message: String? = null, base: String = "Email invalid") :
+    InvalidPropertyException(message, base)
+
+class PasswordInvalidException(message: String? = null, base: String = "Password invalid") :
+    InvalidPropertyException(message, base)
+
 open class AlreadyExistsException(message: String? = null, base: String = "Already exists") :
     Exception(message(base, message))
 
