@@ -5,17 +5,19 @@ import domain.repo.user.UserRepo
 import io.mockk.every
 import io.mockk.mockk
 import kotlinx.coroutines.runBlocking
+import usecases.dependency.PasswordEncoder
 import usecases.logger
 import usecases.model.RegisterUserModel
-import usecases.usecase.UsecaseTests
+import usecases.usecase.UsecaseTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 
 
-class RegisterTest : UsecaseTests {
+class RegisterTest : UsecaseTest {
     private val repo = mockk<UserRepo>()
-    override val usecase = Register(logger, repo)
+    private val passwordEncoder = mockk<PasswordEncoder>()
+    override val usecase = Register(logger, repo, passwordEncoder)
 
     private val registerModel = RegisterUserModel(email, NewPassword(password.value))
 
@@ -23,6 +25,7 @@ class RegisterTest : UsecaseTests {
     override fun success() {
         runBlocking {
             every { runBlocking { repo.findByEmail(email) } } returns null
+            every { runBlocking { passwordEncoder.encode(any()) } } returns passwordHash
             every { runBlocking { repo.save(any()) } } returns user
             val result = usecase(null, registerModel)
             assertEquals(userModel, result)

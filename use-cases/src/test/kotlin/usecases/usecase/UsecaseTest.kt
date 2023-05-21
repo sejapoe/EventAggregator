@@ -1,6 +1,6 @@
 package usecases.usecase
 
-interface UsecaseTests {
+interface UsecaseTest {
     val usecase: UsecaseType<*>
 
     fun success()

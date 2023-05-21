@@ -12,12 +12,12 @@ import usecases.dependency.PasswordEncoder
 import usecases.logger
 import usecases.model.LoginUserModel
 import usecases.model.UserModel
-import usecases.usecase.UsecaseTests
+import usecases.usecase.UsecaseTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 
-class LoginUserTest : UsecaseTests {
+class LoginUserTest : UsecaseTest {
     private val repo = mockk<UserRepo>()
     private val passwordEncoder = mockk<PasswordEncoder>()
     private val authenticator = mockk<Authenticator>()

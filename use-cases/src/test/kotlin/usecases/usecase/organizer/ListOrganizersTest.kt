@@ -1,30 +1,32 @@
-package usecases.usecase.user
+package usecases.usecase.organizer
 
 import domain.entity.user.AuthException
 import domain.entity.user.LoginException
-import domain.repo.user.UserRepo
+import domain.repo.organizer.OrganizerRepo
 import io.mockk.every
 import io.mockk.mockk
 import kotlinx.coroutines.runBlocking
 import usecases.logger
 import usecases.usecase.UsecaseTest
+import usecases.usecase.user.userModel
+import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 
-@Suppress("unused")
-class ListUsersTest : UsecaseTest {
-    private val repo = mockk<UserRepo>()
-    override val usecase = ListUsers(logger, repo)
+class ListOrganizersTest : UsecaseTest {
+    val repo = mockk<OrganizerRepo>()
+    override val usecase = ListOrganizers(logger, repo)
 
+    @Test
     override fun success() {
         runBlocking {
-            every { runBlocking { repo.get(id) } } returns user
-            every { runBlocking { repo.getAll() } } returns listOf(user)
+            every { runBlocking { repo.getAll() } } returns listOf(organizer)
             val result = usecase(userModel).items
-            assertEquals(result, listOf(userModel))
+            assertEquals(listOf(organizerModel), result)
         }
     }
 
+    @Test
     override fun unauthenticated() {
         runBlocking {
             assertFailsWith<LoginException> {
@@ -33,6 +35,7 @@ class ListUsersTest : UsecaseTest {
         }
     }
 
+    @Test
     override fun `No user rules`() {
         runBlocking {
             assertFailsWith<AuthException> {

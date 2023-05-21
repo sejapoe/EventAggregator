@@ -1,6 +1,7 @@
 @file:Suppress("UNUSED_VARIABLE")
 package domain.entity
 
+import domain.entity.event.DateInvalidException
 import domain.entity.event.Event
 import domain.entity.event.EventInvalidException
 import domain.entity.organizer.Organizer
@@ -76,7 +77,7 @@ class EventTests {
 
     @Test
     fun `Invalid Event Date`() {
-        assertFailsWith<EventInvalidException> {
+        assertFailsWith<DateInvalidException> {
             val invalidEvent = validEvent.copy(
                 date = LocalDateTime.now().minusDays(1),
             )
